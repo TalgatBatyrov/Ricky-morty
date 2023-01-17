@@ -13,15 +13,15 @@ class CharacterCubit extends Cubit<CharacterState> {
     try {
       emit(CharacterLoading());
       var response =
-      await _dio.get('$_baseUrl/character');
+      await _dio.get('$_baseUrl/character?page=2');
 
       final characters = response.data['results']
           .map<Character>((res) => Character.fromJson(res))
           .toList();
 
       emit(CharacterLoaded(characters: characters));
-    } catch (e) {
-      print(e);
+    } on DioError catch (e) {
+     emit(CharacterError(error: e.error.toString()));
     }
   }
 

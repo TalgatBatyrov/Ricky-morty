@@ -15,9 +15,17 @@ class SingleCharacterPage extends StatelessWidget {
       create: (context) =>
       SingleCharacterCubit()..getSingleCharacter(id: characterId),
       child: Scaffold(
+        backgroundColor: characterId.isEven ? Colors.red : Colors.green,
         appBar: AppBar(title: const Text('Details page')),
         body: BlocBuilder<SingleCharacterCubit, SingleCharacterState>(
           builder: (context, state) {
+            if (state is SingleCharacterError) {
+              if (state.error != null) {
+                return Center(
+                  child: Text(state.error!),
+                );
+              }
+            }
             if (state is SingleCharacterLoaded) {
               return Center(
                 child: Card(
