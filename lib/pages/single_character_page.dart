@@ -49,6 +49,14 @@ class SingleCharacterPage extends StatelessWidget {
                             },
                           ),
                         ),
+                        Visibility(
+                          visible: true,
+                          child: AnimatedContainer(
+                            duration: const Duration(seconds: 3),
+                            child: const Text('Hello world !!!'),
+
+                          ),
+                        ),
                         Text(state.character.name),
                         Text(state.character.status),
                         Text(state.character.species),
